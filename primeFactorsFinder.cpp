@@ -25,6 +25,7 @@ int findR(const int base, const int goal) {
     int r = 1;
     int attempts = 0;
     while (attempts < attemptLimit) {
+        std::cout << "Calculating power. Guess: " << base << "^" << r << std::endl;
         ans = pow(base, r);
         if ((ans % goal) == 1) return r;
         r++;
@@ -37,6 +38,7 @@ int findR(const int base, const int goal) {
 //r is the exponent
 vector2 factor(const int base, const int r) {
     vector2 sol;
+    std::cout << "Factoring..." << std::endl;
     long double factor = pow(base, r / 2);
     sol.n1 = factor + 1;
     sol.n2 = factor - 1;
@@ -54,6 +56,7 @@ vector2 euclidesAlgorithm(const vector2 vSol, const int goal) {
     int remainder = INT_MAX;
 
     while (remainder != 0) {
+        std::cout << "Applying euclides algorithm, dividend: " << dividend << " divisor: " << divisor << std::endl;
         remainder = dividend % divisor;
         if (remainder == 0) break;
         dividend = divisor;
@@ -66,8 +69,9 @@ vector2 euclidesAlgorithm(const vector2 vSol, const int goal) {
 
 int main()
 {
-    int productOfFactors = 478;
-    int g = 5;
+    //478, 5
+    int productOfFactors = 77;
+    int g = 8;
     vector2 factors = euclidesAlgorithm(factor(g, findR(g, productOfFactors)), productOfFactors);
-    std::cout << factors.n1 << " " << factors.n2;
+    std::cout << "The factors of " << productOfFactors << " are: " << factors.n1 << " : " << factors.n2 << std::endl;
 }
